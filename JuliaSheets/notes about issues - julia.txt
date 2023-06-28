@@ -1,0 +1,98 @@
+Note to self: CTRL-F TO MAKE SURE NO "edX"s or "video"s or "lecture"s  or "week"s ARE LEFT BEHIND!!
+
+
+
+
+
+
+- Can not get interactive Bloch Sphere to work
+	- Interactive Bloch Sphere issues where caused by style commands in bloch.jl
+	  These commands have bein dissabled. The commands causing the issue:
+		-ax[:w_zaxis][:line][:set_visible](false)
+		-ax[:legend](fontsize = "medium")
+		
+
+- Copyright at bottom of notebooks - what to change it to?
+
+
+
+Getting Started:
+- Link to quant-econ.net broken!! Need a replacement?
+- Link to the second mathjax tutorial is broken (http://www.suluclac.com/Wiki+MathJax+Syntax). I have simply removed it since there is already another mathjax tutorial.
+
+Chapter 1:
+- Opening para, confirm if it is okay. Should we mention something about answers?
+- Bloch sphere doesn't display.
+
+Chapter 2:
+- Bloch sphere doens't display for this chapter either
+
+Chapter 4:
+- Reference to the Delft Bell experiment: should I remove it? I do not see a reference to it in the book.
+
+Chapter 5:
+- SCS optimisation of min-entropy gives 0 for both examples. Is it correct?
+
+Chapter 7:
+- Para before encoder needs to be checked. 
+
+
+
+
+
+
+
+Log of Changes made:
+Common:
+- Rename any "edX Exercises" to "Exercises"
+- round(...,digits) -> round(..., digits=digits) in many places
+- trace(Matrix) -> tr(Matrix)
+
+- linspace(a,b,n)->collect(LinRange(a,b,n)) in bloch.jl
+    can also use collect(range(0,stop=b,length=n))
+- cos(Vector) -> cos.(Vector) in bloch.jl
+    Same with sin and ones
+- Comment out ax[:set_aspect](true) in bloch.jl
+    Can't set aspect ratio with a boolean
+
+Chapter1:
+- Week0 -> Chapter1
+- Opening block of text
+- ax = axes(polar = "true") -> ax = PyPlot.axes(polar = "true") in chapter1.jl
+- fig = figure(figsize=(4,4)) -> fig = PyPlot.figure(figsize=(4,4)) in chapter1.jl
+- "Supplement to Exercise 7" -> "Supplement to Exercise 8"
+    I assume this was a typo?
+    
+Chapter2:
+- Week 1 -> Chapter 2. Also in index.
+- "Week 1 - From essential tools to the first quantum protocol" -> "Chapter 2 - Quantum tools and a first protocol"
+- Removed github link to Getting started
+- (rawImage + key_ex5) % 2 -> (rawImage + key_ex5) .% 2 in load.jl
+- using LinearAlgebra for eigvals (in main.jl)
+- add L before "" for a string to use latex
+- comment out set aspect rate in bloch.jl
+- Add instructions for modulo 2 of a vector/matrix
+- Remove "Not graded" tag from Exercise 9
+
+Chapter4:
+- Week 2 -> Chapter 4. Also in index.
+- using LinearAlgebra for eigvals
+- using SparseArrays in partialtranspose.jl
+    for issparse()
+- "Array(Int, n^2)"->"zeros(Int, n^2)" in partialtranspose.jl
+
+Chapter5:
+- Removed warning about JuliaBox updating their kernel
+- type -> mutable struct in bloch.jl
+    type throws a syntax error.
+- "videos and lecture notes" -> "book"
+- "video's" -> "chapter"
+- SCSSolver(verbose=false) -> SCS.Optimizer())
+
+Chapter6:
+- using Convex: AbstractExpr; using LinearAlgebra; in main.
+- SCSSolver(...) -> optimizer = Convex.MOI.OptimizerWithAttributes(SCS.Optimizer, "max_iters" => 2500)
+    	solve!(problem, optimizer) in minEntropy.jl
+- "inputRhoArrayEx = Array[1/3*e0, 1/3*e0, zeros(e0), 1/3*e1];"->"inputRhoArrayEx = Array[1/3*e0, 1/3*e0, zeros(size(e0)), 1/3*e1];"
+- v = bin(i-1,l) -> v = string(i-1, base = 2, pad=l)
+- Made use of vectors and their transposes consistent in the parts with syndromes

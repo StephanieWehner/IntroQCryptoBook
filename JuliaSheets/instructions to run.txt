@@ -1,0 +1,58 @@
+1. Install python (3.10). Make sure it is in the PATH.
+
+2. Install jupyter-notebook through pip:
+        pip install notebook
+
+3. Install Julia (1.9.0). Make sure it is in the PATH.
+
+4.  a. Open Julia in command prompt or in powershell
+    b. Type "]" to enter package mode
+    c. Type and run "add Interact IJulia PyPlot LaTeXStrings WebIO"
+
+5.  a. Install WebIO extension through pip:
+        python3 -m pip install --upgrade webio_jupyter_extension
+    b. Ensure that WebIO extension is installed for jupyter notebook:
+        jupyter nbextension list
+        should return an entry
+         "webio-jupyter-nbextension/nbextension enabled
+      - Validating: ok"
+
+6. Launch jupyter notebook from command prompt/powershell:
+        jupyter notebook
+
+7. Navigate to directory with Julia Jupyter notebooks and open them.
+
+
+
+
+
+Package versions for Julia:
+(@v1.9) pkg> status
+Status `C:\Users\admin\.julia\environments\v1.9\Project.toml`
+  [7073ff75] IJulia v1.24.2
+  [c601a237] Interact v0.10.5
+  [b964fa9f] LaTeXStrings v1.3.0
+  [d330b81b] PyPlot v2.11.1
+  [0f1e0344] WebIO v0.8.21
+
+
+Relevant packages in pip (python 3.10.10):
+ipykernel                6.23.1
+ipython                  8.14.0
+ipython-genutils         0.2.0
+ipywidgets               8.0.6
+jupyter                  1.0.0
+jupyter_client           8.2.0
+jupyter-console          6.6.3
+jupyter_core             5.3.0
+jupyter-events           0.6.3
+jupyter-lsp              2.2.0
+jupyter_server           2.6.0
+jupyter_server_terminals 0.4.4
+matplotlib-inline        0.1.6
+nbclassic                1.0.0
+nbclient                 0.8.0
+nbconvert                7.4.0
+nbformat                 5.9.0
+notebook                 6.5.4
+webio-jupyter-extension  0.1.0
