@@ -1,20 +1,17 @@
 using Pkg
-
-Pkg.add("Convex");
-Pkg.add("SCS");
+Pkg.add("SCS")
+Pkg.add("Convex")
 Pkg.add("Distributions");
 
+using SCS
+using Convex
 using PyPlot
 using Interact
-using Convex;
-using SCS;
-using Convex: AbstractExpr;
-using LinearAlgebra;
+using LinearAlgebra
 using Random;
 using Distributions;
 
 import Base.kron;
-
 
 include("mmp.jl")
 include("bell_test.jl")
