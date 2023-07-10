@@ -20,6 +20,3 @@ function isQuantumState(rho)
 
 	return 1;
 end
-
-	
-

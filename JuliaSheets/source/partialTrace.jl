@@ -104,6 +104,3 @@ function partialTrace(rho ,sub = "B"::ASCIIString)
             error("This size density operator are not supported yet")
         end
 end
-
-
-    

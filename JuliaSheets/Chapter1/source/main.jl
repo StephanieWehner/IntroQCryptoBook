@@ -19,8 +19,8 @@
 
 using PyPlot                            # the Julia interface to matplotlib (python package)
 using Interact                          # necessary to be able to use interactive elements.
-include("bloch.jl")                   # the Bloch sphere PyPlot/matplotlib code
-include("func.jl")                     # the functions ket_to_bloch()
+include("../../source/bloch.jl")                   # the Bloch sphere PyPlot/matplotlib code
+include("../../source/func.jl")                     # the functions ket_to_bloch()
 include("chapter1.jl")                 # mostly specific PyPlot code to draw polar plots
 
 # include("polar.jl") : Not used. Involves a more object-oriented approach.

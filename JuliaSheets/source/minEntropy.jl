@@ -57,4 +57,3 @@ function minEntropy(rhoAE,dA)
 
 	return (-log2(problem.optval));
 end
-

@@ -13,12 +13,11 @@
 #
 
 #############################################
-# INFO:
-# This is supposed to be a port of
-# QuTiPs Bloch Sphere (open source; just matplotlib)
+# INFO:                                                                          #
+# This is supposed to be a port of                                 #
+# QuTiPs Bloch Sphere                                                 #
+# -      Willem                                                                 #                                                   #
 #############################################
-
-##############################################
 # Summary:
 #               Allows you to make Bloch sphere pictures
 #               in an object-oriented fashion.
@@ -27,11 +26,11 @@
 #               render the picture with render() function.
 #               Should be easy to follow. See below.
 
-#####################
-# TYPE DEFINITION
-#####################
+#########################
+# TYPE DEFINITIONS   #
+#########################
 
-# ELEMENT type: elements to plot on the Bloch sphere:
+# Our element type: elements to plot on the Bloch sphere:
 # Points, vectors, lines etc.
 mutable struct Element
     coord::Vector
@@ -53,8 +52,8 @@ mutable struct Bloch
     equator_color::Vector{Float64}
     view_elevation::Float64
     view_azimuth::Float64
-    elements::Vector{Element} # our points/vectors
-    colors::Vector{String}
+    elements # our points/vectors
+    colors
 end
 
 # Standard Initialization
@@ -69,16 +68,18 @@ Bloch() = Bloch([0.5,0.1,0.1,0.02],
                             )
 
 #############
-# METHODS
+# METHODS #
 #############
 
-# method to add element to BS
+# method to add element to Bloch Sphere
 function add_element(b::Bloch,
                                         coord::Vector;
-                                        kind = "vector",
-                                        label ="",
-                                        linestyle = "-",
-                                        markerSize = 20)
+                                        kind = "vector"::String, 
+                                        label =""::AbstractString,
+                                        linestyle = "-"::String,
+                                        markerSize = 20::Int)
+
+    #linestyles = ['_', '-', '--', ':']
 
     if length(coord) == 2 # assume degree coords θ,ϕ
         xyz = [
@@ -92,25 +93,25 @@ function add_element(b::Bloch,
         error("Points = [θ,ϕ] (degrees) or [x,y,z] (float)")
     end
 
-    for el in b.elements
-        if el.coord == xyz
-            return
-        end
-    end
-
-    push!(b.elements,Element(xyz,kind,label,linestyle,markerSize))
+    push!(b.elements, Element(xyz,kind,label,linestyle,markerSize))
 end
 
-# Some Aliassing
-add_vector(b::Bloch, coord::Vector) = add_element(b::Bloch, coord::Vector)
+# ALIAS: different, specialized names for add_element
+add_vector(b::Bloch, coord::Vector) = add_element(b, coord)
+add_vector(b::Bloch, coord::Vector, x::AbstractString) = add_element(b, coord, label = x)
 
-# "Clear the plot"
+add_point(b::Bloch, coord::Vector) = add_element(b, coord, kind = "point")
+add_point(b::Bloch, coord::Vector, x::AbstractString) = add_element(b, coord, kind = "point", label = x)
+add_point(b::Bloch, coord::Vector, x::AbstractString, y::Int) = add_element(b, coord, kind = "point", label = x, markerSize = y)
+
+
+# CLEAR the element list.
 function clear(b::Bloch)
     b.elements = []
 end
 
     ########################################################
-    # Render the Bloch sphere: sphere, mesh, equator, axis
+    # Render the Bloch sphere: sphere, mesh, equator, axis                   #
     ########################################################
 function render(b::Bloch,rotate_z = 0)
 
@@ -134,12 +135,12 @@ function render(b::Bloch,rotate_z = 0)
 
     # plot xyz bloch sphere axis
     span = collect(LinRange(-1,1,2))
-    plot(span, 0*span, zs=0, color=b.axis_color, linewidth=1, label="X")
-    plot(0*span, span, zs=0, color=b.axis_color, linewidth=1, label="Y")
-    plot(0*span, span, zs=0, zdir="y", color=b.axis_color, linewidth=1, label="Z")
+    plot(span, 0*span, zs=0, color=b.axis_color, linewidth=1)
+    plot(0*span, span, zs=0, color=b.axis_color, linewidth=1)
+    plot(0*span, span, zs=0, zdir="y", color=b.axis_color, linewidth=1)
 
     ######################
-    # Plot elements on BS
+    # Plot elements on BS      #
     ######################
     if length(b.elements)>0
         for (i,el) in enumerate(b.elements)
@@ -149,6 +150,7 @@ function render(b::Bloch,rotate_z = 0)
                             el.coord[1],
                             el.coord[2],
                             el.coord[3],
+                            label = el.label,
                             s = el.markerSize,
                             color = b.colors[(i-1)%6 + 1]
                             )
@@ -158,6 +160,7 @@ function render(b::Bloch,rotate_z = 0)
                         [0,1]*el.coord[1],
                         [0,1]*el.coord[2],
                         [0,1]*el.coord[3],
+                        label = el.label,
                         linestyle = el.linestyle,
                         color = b.colors[(i-1)%6 + 1]
                 )
@@ -175,7 +178,7 @@ function render(b::Bloch,rotate_z = 0)
     end
 
     ###########
-    # Styling
+    # Styling     #
     ###########
    # get the current axes(drawing area)
     ax = gca()
@@ -204,11 +207,14 @@ function render(b::Bloch,rotate_z = 0)
     ax[:w_yaxis][:pane][:set_visible](false)
 
     # remove  z-axis
-	# For some reason this is broken and causes the plots to not appear
+    # For some reason this is broken and causes the plots to not appear
     # ax[:w_zaxis][:line][:set_visible](false)
 
-    # make sphere look like a sphere
+    # # make sphere look like a sphere
     # ax[:set_aspect](true)
+
+    # add legend
+    # ax[:legend](fontsize = "medium")
 
     # view angle
     ax[:view_init](b.view_elevation,b.view_azimuth+rotate_z)

@@ -291,4 +291,3 @@ function pwinCHSH(rho_AB, θ_0, θ_1, γ_0, γ_1)
     p00, p01, p10, p11 = bell_test_calculations(rho_AB, θ_0, θ_1, γ_0, γ_1);
     return 0.25*(p00[1] + p00[4] + p01[1] + p01[4] + p10[1] + p10[4] + p11[2] + p11[3])
 end
-

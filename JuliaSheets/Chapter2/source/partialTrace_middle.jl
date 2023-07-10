@@ -11,31 +11,45 @@
 # 
 # THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 # 
+#################
+#
+# partialTrace
+# 
+# Traces out the middle system from A, B, C
+# A and C can be one dimensional, in which case we just trace over half a bipartite state 
+#
+# Input:
+# 	rho: density matrix of A, B, C
+# 	nA:  dimension of A
+# 	nB:  dimension of B
+# 	nC:  dimension of C
+# Output:
+#	reduced density matrix on A and C
+#
 
-####################################
-# Recurring general purpose functions      
-####################################
+function partialTrace(rho,nA, nB, nC)
 
-###############
-# CONVERSION 
-###############
+	# Check the size of rho
+	totalDim = nA * nB * nC;
+	(d1,d2) = size(rho);
+	if (d1 != d2)
+		error("Rho must be a square matrix.");
+		return;
+	end
+	if(d1 != totalDim)
+		error("Dimensions don't match the state.");
+		return;
+	end
 
-# Summary: can be used to transform a qubit state vector into its Bloch coordinate vector
-# Input: two (complex) numbers,
-# Output: cartesian Bloch coordinate vector.
-function ket_to_bloch(ket::Array, digits = 3)
-    α = ket[1]
-    β = ket[2]
-    v_x = α*conj(β) + conj(α)*β  # = 2Re(α*conj(β))
-    v_y = im*α*conj(β) - im*conj(α)*β # = -2Re(α*conj(β))
-    v_z = α*conj(α) - β*conj(β)
-    return round.(real([v_x,v_y,v_z]), digits=digits)
+	# Prepare to compute the partial trace, inefficiently but instructive by measuring the 
+	# system to be traced out in the standard basis
+	#
+	# ketPT(nA,nB,nC,j) = I_A tensor |j>_B tensor I_C and the corresponding braPT perform the measurement
+	# corresponding to outcome j
+	#
+	procList = [braPT(nA,nB,nC,j)*rho*ketPT(nA,nB,nC,j) for j in 1:nB];
+	outRho = sum(procList);
+
+	return outRho;
+
 end
-
-function ket_to_bloch(α::Number,β::Number, digits = 3)
-    v_x = α*conj(β) + conj(α)*β  # = 2Re(α*conj(β))
-    v_y = im*α*conj(β) - im*conj(α)*β # = -2Re(α*conj(β))
-    v_z = α*conj(α) - β*conj(β)
-    return round.(real([v_x,v_y,v_z]), digits=digits)
-end
-

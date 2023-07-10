@@ -51,4 +51,3 @@ function dens_to_bloch(dens::Array, digits = 3)
     v_z = real(tr(dens*Z))
     return [v_x, v_y, v_z]
 end
-

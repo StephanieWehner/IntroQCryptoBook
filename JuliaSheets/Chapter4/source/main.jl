@@ -8,8 +8,8 @@ using PyPlot
 using Interact
 using LinearAlgebra
 
-include("mmp.jl")
-include("bell_test.jl")
-include("partialTrace.jl")
-include("partialTranspose.jl")
-include("check_entangled.jl")
+include("../../source/mmp.jl")
+include("../../source/bell_test.jl")
+include("../../source/partialTrace.jl")
+include("../../source/partialTranspose.jl")
+include("../../source/check_entangled.jl")

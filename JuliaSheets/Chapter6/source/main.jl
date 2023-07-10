@@ -1,3 +1,8 @@
+using Pkg
+
+Pkg.add("Convex");
+Pkg.add("SCS");
+
 using PyPlot
 using Interact
 using Convex;
@@ -6,12 +11,11 @@ using Convex: AbstractExpr;
 using LinearAlgebra;
 
 import Base.kron;
-include("kron.jl");
-
-include("makeM.jl");
-include("bloch.jl")
-include("func.jl")
-include("minEntropy.jl")
-include("isQuantumState.jl")
-include("D.jl")
-include("eVec.jl")
+include("../../source/kron.jl");
+include("../../source/makeM.jl");
+include("../../source/bloch.jl")
+include("../../source/func.jl")
+include("../../source/minEntropy.jl")
+include("../../source/isQuantumState.jl")
+include("../../source/D.jl")
+include("../../source/eVec.jl")
