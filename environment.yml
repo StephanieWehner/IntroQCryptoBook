@@ -1,0 +1,7 @@
+name: IntroQCryptoBook
+channels:
+  - conda-forge
+dependencies:
+  - numpy
+  - matplotlib
+  - webio-jupyter-extension

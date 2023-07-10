@@ -1,2 +1,11 @@
-[compat] 
-julia = "1.9"
+[compat]
+julia = "=1.9.1"
+
+[deps]
+Convex = "f65535da-76fb-5f13-bab9-19810c17039a"
+IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
+Interact = "c601a237-2ae4-5e1e-952c-7a85b0c7eef1"
+LaTeXStrings = "b964fa9f-0449-5b57-a5c2-d3ea65f4040f"
+PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"
+SCS = "c946c3f1-0d1f-5ce8-9dea-7daa1f7e2d13"
+WebIO = "0f1e0344-ec1d-5b48-a673-e5cf874b6c29"
