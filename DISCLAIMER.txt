@@ -1,0 +1,28 @@
+Welcome! 
+
+We hope these notebooks will help you sharpen your understanding of quantum 
+cryptography by letting you experiment and gain intuition. Making such notebooks and 
+instructions takes quite some time, and we debated whether it is at all wise to make 
+them available alongside this book. We chose to do this anyways, as we believe they 
+can be greatly helpful in helping you explore and gain intuition about quantum 
+cryptography.
+
+However, please note that the Julia Jupyter Notebooks for this book ans associated materials
+are provided AS IS. In particular, please understand we are not available for any form of 
+IT support, nor will we necessarily update these notebooks to any future versions of Julia 
+or associated packages.
+
+Please see the instructions for executing these Notebooks locally, as well as online 
+on MyBinder. If you have never used Jupyter notebooks before, we recommend using MyBinder. 
+
+Enjoy!
+Stephanie
+
+THIS SOFTWARE IS PROVIDED BY THE AUTHORS ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, 
+INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR 
+A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY 
+DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, 
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR 
+PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER 
+IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN 
+ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
