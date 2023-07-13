@@ -7,7 +7,7 @@ them available alongside this book. We chose to do this anyways, as we believe t
 can be greatly helpful in helping you explore and gain intuition about quantum 
 cryptography.
 
-However, please note that the Julia Jupyter Notebooks for this book ans associated materials
+However, please note that the Julia Jupyter Notebooks for this book and associated materials
 are provided AS IS. In particular, please understand we are not available for any form of 
 IT support, nor will we necessarily update these notebooks to any future versions of Julia 
 or associated packages.
