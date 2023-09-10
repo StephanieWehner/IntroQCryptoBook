@@ -4,7 +4,7 @@ channels:
   - defaults
   - conda-forge/label/broken
 dependencies:
-  - python=3.11.*
+  - python=3.10.*
   - numpy=1.24.*
   - matplotlib=3.7.*
   - webio-jupyter-extension=0.1.*
